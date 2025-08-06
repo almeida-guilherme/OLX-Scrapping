@@ -1,19 +1,50 @@
-Para utilizar essa automação, você deve se atentar em dois pontos.
+# OLX Automation Bot
 
-1- Arquivo Main.py
+This is an automation script that navigates through the OLX website, browsing all available pages and visiting each ad.  
+For every ad, it checks whether the user is blocked. If the user is blocked, the bot skips the ad. Otherwise, it sends a personalized message on behalf of the user.
 
-Esse sera o arquivo que você devera rodar para a automação rodar
+---
 
-2- Arquivo data.json
+## ⚙️ How to Use
 
-Esse é o arquivo que o robô consome para poder fazer o processo. Cada atributo tem seu propósito como veremos agora:
+To use this automation, you should pay attention to two key components:
 
--> Ad_List [LISTA DE STRINGS]: Aqui sera armazenado todos os anúncios que o robô já visitou. Isso evita que ele mande mensagem para o mesmo usuário duas vezes. Caso você queira que ele envie novamente uma mensagem para o anuncio especifico, apenas
-delete o link diretamente do arquivo
+### 1. `Main.py`
 
--> Last_execution [STRING]: Serve para armazenar a ultima vez que o robô executou
+This is the main script you need to run in order to start the automation.
 
--> products [LISTA DE DICIONÁRIOS]: Aqui sera onde ficara o nome do produto (key) e o link da olx para ser encontrado (value). O nome do produto é extremamente importante para evitar que seja enviado mensagem para produtos semelhantes.
-ex: Teclado musical é diferente de teclado do computador. 
+### 2. `data.json`
 
--> message: Serve para inserir a mensagem que você gostaria que fosse enviada para o usuário final
+This file is consumed by the bot and is essential for the process. Each attribute has a specific purpose:
+
+- **`Ad_List`** `[LIST OF STRINGS]`:  
+  Stores all the ads that the bot has already visited.  
+  This prevents the bot from messaging the same user more than once.  
+  If you want to resend a message to a specific ad, simply delete the corresponding link from the list.
+
+- **`Last_execution`** `[STRING]`:  
+  Records the last time the bot was executed.
+
+- **`products`** `[LIST OF DICTIONARIES]`:  
+  Each dictionary stores a product name as the key and the OLX search URL as the value.  
+  The product name helps to avoid sending messages to similar but incorrect products.  
+  _Example: “Musical keyboard” is different from “computer keyboard”._
+
+- **`message`**:  
+  This is where you define the message that will be sent to the final user.
+
+---
+
+## 💡 Example `data.json`
+
+```json
+{
+  "Ad_List": ["https://www.olx.com/ad123", "https://www.olx.com/ad456"],
+  "Last_execution": "2025-08-06T15:30:00",
+  "products": [
+    {
+      "Musical Keyboard": "https://www.olx.com/search?query=musical+keyboard"
+    }
+  ],
+  "message": "Hi! I'm interested in your product. Is it still available?"
+}
